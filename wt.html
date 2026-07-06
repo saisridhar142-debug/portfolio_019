@@ -1,0 +1,270 @@
+"<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Portfolio | G.Sai Sreedhar</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    section {
+      scroll-margin-top: 80px;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.35;
+      z-index: -1;
+      animation: floatGlow 8s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      top: -40px;
+      left: -40px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    body::after {
+      right: -40px;
+      bottom: -40px;
+      background: rgba(255, 209, 102, 0.35);
+      animation-duration: 10s;
+    }
+
+    @keyframes floatGlow {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+      to {
+        transform: translate(20px, 25px) scale(1.08);
+      }
+    }
+
+    #skills ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    #skills li {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    #skills li:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.24);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    button, .btn {
+      transition: all 0.3s ease;
+    }
+
+    button:hover, .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, textarea, button {
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #7A1336;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #ffd166;
+      box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.25);
+      background: #ffffff;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      background: #7A1336;
+      color: #ffffff;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(216, 68, 117, 0.95);
+      padding: 14px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffd166;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 12px 16px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+
+      #skills ul {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .card {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body style="background: linear-gradient(135deg, #F5276C 0%, #F54927 45%,  #F5B027 100%);
+ font-family: 'Poppins', sans-serif; color: #ffffff; position: relative; overflow-x: hidden;">
+
+  
+  <!-- 1. Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 2. Hero -->
+  <section id="home">
+    <h1>G.Sai Sreedhar</h1>
+    <p>III B.Tech IT-A | ANITS</p>
+    <a href="#contact" style="color: #7A1336;">Get In Touch</a>
+  </section>
+
+  <!-- 3. About -->
+  <section id="about">
+    <h2>About Me</h2>
+  <p>
+            Hello! I am Sai Sreedhar, a passionate student currently pursuing my <strong>Bachelor of Technology</strong>
+            in <strong>Information Technology</strong> at ANITS.
+            Ever since I wrote my first line of HTML, I have been captivated by the art of turning complex logical problems
+             into simple, beautiful, and intuitive user experiences.
+          </p>
+<p>
+           My primary interest lies in programming. Beyond my main coursework, I actively engage with
+            the tech community through open-source collaborations, coding hackathons, and exploring modern UI/UX architecture
+          </p>
+
+  </section>
+
+  <!-- 4. Skills -->
+  <section id="skills">
+    <h2>My Skills</h2>
+    <ul>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>Bootstrap</li>
+      <li>JavaScript</li>
+      <li>Python</li>
+      <li>Git & GitHub</li>
+      <li>Responsive Web Design</li>
+    </ul>
+  </section>
+
+  <!-- 5. Projects -->
+  <section id="projects">
+    <div class="card">
+      <h3>Project Name</h3>
+     <p><strong>Virtual Placement Cell</strong> is a user-friendly platform that takes
+         the stress out of campus recruiting by keeping job alerts, resumes, and interview schedules
+        all in one place, making it easier for students to connect with employers and land great jobs.
+    </p>
+<a href="#" style="color: #7A1336;">View Project</a>
+    </div>
+  </section>
+
+  <!-- 6. Contact Form -->
+  <section id="contact">
+    <h2 style="color: #ffffff;">Contact Me</h2>
+    <form>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message"></textarea>
+      
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- 7. Footer -->
+  <footer>
+    <p>&copy; 2026 G.Sai Sreedhar. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>"
