@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts - Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-color: #764ba2;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-main: #2d3748;
+            --text-muted: #718096;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at 10% 20%, rgba(216, 241, 230, 0.46) 0.1%, rgba(233, 226, 226, 0.28) 90.1%),
+                linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Custom Glassmorphic Navbar */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.4rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-main) !important;
+            position: relative;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        /* Glassmorphic Profile Card */
+        .profile-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            overflow: hidden;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto 1.5rem auto;
+            border-radius: 50%;
+            padding: 5px;
+            background: var(--primary-gradient);
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-img-container:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
+
+        .student-name {
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+        }
+
+        .student-branch {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            text-align: left;
+        }
+
+        .info-item {
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            font-size: 1.1rem;
+            width: 30px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 10px;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: var(--text-muted);
+            width: 85px;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        /* View Profile Button */
+        .btn-view-profile {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.25);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            width: 100%;
+        }
+
+        .btn-view-profile:hover {
+            box-shadow: 0 12px 24px rgba(118, 75, 162, 0.4);
+            transform: translateY(-2px);
+            background: var(--primary-gradient);
+            color: white;
+            opacity: 0.95;
+        }
+
+        .btn-view-profile:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.25);
+        }
+
+        /* Glassmorphic Table Card */
+        .details-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            height: 100%;
+        }
+
+        .card-title-custom {
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .card-title-custom::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Bootstrap Table Customizations */
+        .table-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-table {
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+
+        .custom-table thead {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .custom-table th {
+            font-weight: 600;
+            padding: 1rem;
+            border-bottom: none;
+        }
+
+        .custom-table td {
+            padding: 1rem;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .custom-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: rgba(118, 75, 162, 0.05) !important;
+        }
+
+        /* Marks Badges */
+        .badge-marks {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            font-weight: 600;
+            padding: 0.4em 0.8em;
+            border-radius: 6px;
+        }
+
+        .badge-total {
+            background: rgba(118, 75, 162, 0.15);
+            color: var(--accent-color);
+            font-weight: 700;
+            padding: 0.4em 0.8em;
+            border-radius: 6px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--glass-border);
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .footer-college {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.25rem !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Responsive Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa-solid fa-graduation-cap me-2"></i>EduPortal
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container using Bootstrap Grid -->
+    <main class="container my-5 flex-grow-1">
+        <div class="row align-items-stretch justify-content-center">
+
+            <!-- Left Column: Student Profile Card (takes 4 cols on large, 5 on medium, full on mobile) -->
+            <div class="col-lg-4 col-md-5 mb-4">
+                <div class="profile-card text-center h-100 p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <!-- Student Photo -->
+                        <div class="profile-img-container">
+                            <img src="./profile_sai.jpeg" alt="Student Photo" class="profile-img"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop';">
+                        </div>
+
+                        <!-- Name & Branch -->
+                        <h3 class="student-name">Sai Sreedhar</h3>
+                        <p class="student-branch">Information Technology </p>
+
+                        <!-- Student Details -->
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-icon"><i class="fa-solid fa-id-card"></i></span>
+                                <span class="info-label">Roll No:</span>
+                                <span class="info-value">A24126511019</span>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-icon"><i class="fa-solid fa-envelope"></i></span>
+                                <span class="info-label">Email:</span>
+                                <span class="info-value">gudlasaisreedhar.24.it@anits.edu.in</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- View Profile Button -->
+                    <div>
+                        <button class="btn btn-view-profile" type="button" data-bs-toggle="modal" data-bs-target="#profileModal">
+                            <i class="fa-solid fa-circle-user me-2"></i>View Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Academic Details Table (takes 8 cols on large, 7 on medium, full on mobile) -->
+            <div class="col-lg-8 col-md-7 mb-4">
+                <div class="details-card d-flex flex-column justify-content-between">
+                    <div>
+                        <h3 class="card-title-custom">Academic Performance</h3>
+                        <p class="text-muted mb-4">Summary of semester exam scores and grading analysis.</p>
+
+                        <!-- Academic Details Table -->
+                        <div class="table-responsive">
+                            <table class="table custom-table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Subject Name</th>
+                                        <th scope="col" class="text-center">Internal Marks</th>
+                                        <th scope="col" class="text-center">External Marks</th>
+                                        <th scope="col" class="text-center">Total Marks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Web Technologies</td>
+                                        <td class="text-center"><span class="badge-marks">28 / 30</span></td>
+                                        <td class="text-center"><span class="badge-marks">65 / 70</span></td>
+                                        <td class="text-center"><span class="badge-total">93 / 100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data Structures & Algorithms</td>
+                                        <td class="text-center"><span class="badge-marks">29 / 30</span></td>
+                                        <td class="text-center"><span class="badge-marks">67 / 70</span></td>
+                                        <td class="text-center"><span class="badge-total">96 / 100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Operating Systems</td>
+                                        <td class="text-center"><span class="badge-marks">26 / 30</span></td>
+                                        <td class="text-center"><span class="badge-marks">62 / 70</span></td>
+                                        <td class="text-center"><span class="badge-total">88 / 100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Database Management Systems</td>
+                                        <td class="text-center"><span class="badge-marks">27 / 30</span></td>
+                                        <td class="text-center"><span class="badge-marks">64 / 70</span></td>
+                                        <td class="text-center"><span class="badge-total">91 / 100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Computer Networks</td>
+                                        <td class="text-center"><span class="badge-marks">25 / 30</span></td>
+                                        <td class="text-center"><span class="badge-marks">60 / 70</span></td>
+                                        <td class="text-center"><span class="badge-total">85 / 100</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-college">ANITS</p>
+            <p>&copy; 2026 Sai Sreedhar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for displaying Profile Details -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-weight-700" id="profileModalLabel">Student Profile Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pt-2 pb-4">
+                    <div class="profile-img-container mx-auto mb-3" style="width: 100px; height: 100px; padding: 3px;">
+                        <img src="./profile_sai.jpeg" alt="Student Photo" class="profile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop';">
+                    </div>
+                    <h4 class="student-name" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Sai Sreedhar</h4>
+                    <p class="student-branch mb-4" style="font-size: 0.85rem; font-weight: 600; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px;">Information Technology</p>
+                    
+                    <div class="info-list border rounded-3 overflow-hidden text-start">
+                        <div class="info-item px-3 py-2 bg-light">
+                            <span class="info-icon"><i class="fa-solid fa-user text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px;">Name:</span>
+                            <span class="info-value text-dark">Sai Sreedhar</span>
+                        </div>
+                        <div class="info-item px-3 py-2">
+                            <span class="info-icon"><i class="fa-solid fa-id-card text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px;">Roll Number:</span>
+                            <span class="info-value text-dark">A24126511019</span>
+                        </div>
+                        <div class="info-item px-3 py-2 bg-light">
+                            <span class="info-icon"><i class="fa-solid fa-graduation-cap text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px;">Branch:</span>
+                            <span class="info-value text-dark">Information Technology</span>
+                        </div>
+                        <div class="info-item px-3 py-2">
+                            <span class="info-icon"><i class="fa-solid fa-envelope text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px;">Email ID:</span>
+                            <span class="info-value text-dark text-break">gudlasaisreedhar.24.it@anits.edu.in</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" style="border-radius: 50px;">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for displaying About Details -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-weight-700" id="aboutModalLabel">About Me</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-3 pb-4">
+                    <div class="text-center mb-3">
+                        <div class="info-icon d-inline-block fs-1 mb-2"><i class="fa-solid fa-circle-info text-primary"></i></div>
+                        <h4 class="student-name" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Sai Sreedhar</h4>
+                        <p class="student-branch mb-3" style="font-size: 0.85rem; font-weight: 600; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px;">IT Student & Developer</p>
+                    </div>
+                    <div class="px-2">
+                        <p class="text-muted text-center mb-4" style="font-size: 0.95rem; line-height: 1.6;">
+                            Hello! I am Sai Sreedhar, a passionate student currently pursuing my Bachelor of Technology in Information Technology at ANITS. I love turning logical problems into simple, beautiful, and intuitive web experiences.
+                        </p>
+                        <h6 class="font-weight-700 mb-2" style="font-size: 0.95rem; color: var(--text-main); border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding-bottom: 5px;">Key Interests & Focus</h6>
+                        <ul class="list-unstyled mb-0" style="font-size: 0.9rem; color: var(--text-muted);">
+                            <li class="mb-2"><i class="fa-solid fa-code text-primary me-2"></i> Frontend Web Development (HTML, CSS, JS)</li>
+                            <li class="mb-2"><i class="fa-solid fa-cubes text-primary me-2"></i> Data Structures & Algorithms</li>
+                            <li class="mb-2"><i class="fa-solid fa-circle-nodes text-primary me-2"></i> Responsive UI/UX Design Systems</li>
+                            <li class="mb-0"><i class="fa-solid fa-laptop-code text-primary me-2"></i> Software Engineering Practices</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" style="border-radius: 50px;">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for displaying Contact Details -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-weight-700" id="contactModalLabel">Contact Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pt-3 pb-4">
+                    <div class="info-icon d-inline-block fs-1 mb-3"><i class="fa-solid fa-address-book text-primary"></i></div>
+                    <h4 class="student-name mb-4" style="font-size: 1.4rem;">Get in Touch</h4>
+                    
+                    <div class="info-list border rounded-3 overflow-hidden text-start mb-4">
+                        <div class="info-item px-3 py-2 bg-light" style="display: flex; align-items: center; justify-content: start;">
+                            <span class="info-icon" style="margin-right: 10px;"><i class="fa-solid fa-envelope text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px; font-weight: 500;">Email ID:</span>
+                            <span class="info-value text-dark text-break" style="font-weight: 600;">gudlasaisreedhar.24.it@anits.edu.in</span>
+                        </div>
+                        <div class="info-item px-3 py-2" style="display: flex; align-items: center; justify-content: start;">
+                            <span class="info-icon" style="margin-right: 10px;"><i class="fa-solid fa-location-dot text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px; font-weight: 500;">College:</span>
+                            <span class="info-value text-dark" style="font-weight: 600;">ANITS, Sangivalasa, Visakhapatnam</span>
+                        </div>
+                        <div class="info-item px-3 py-2 bg-light" style="display: flex; align-items: center; justify-content: start;">
+                            <span class="info-icon" style="margin-right: 10px;"><i class="fa-solid fa-graduation-cap text-primary"></i></span>
+                            <span class="info-label text-muted" style="width: 110px; font-weight: 500;">Department:</span>
+                            <span class="info-value text-dark" style="font-weight: 600;">Information Technology</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="mailto:gudlasaisreedhar.24.it@anits.edu.in" class="btn btn-view-profile py-2 px-4" style="width: auto; border-radius: 50px;">
+                            <i class="fa-solid fa-paper-plane me-2"></i>Send Email
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" style="border-radius: 50px;">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap 5 JS Bundle CDN (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
