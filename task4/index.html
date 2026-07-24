@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G.Sai Sreedhar | Portfolio & Contact Validation</title>
+    <meta name="description" content="Personal portfolio of G.Sai Sreedhar - III B.Tech IT student featuring Web Development skills, Virtual Placement Portal, Food Control project, and Contact Form validation.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Navigation Header -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">G.Sai Sreedhar</a>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About Me</a></li>
+                    <li><a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Skills</a></li>
+                    <li><a href="#education" class="nav-link"><i class="fa-solid fa-graduation-cap"></i> Education</a></li>
+                    <li><a href="#projects" class="nav-link"><i class="fa-solid fa-briefcase"></i> Projects</a></li>
+                    <li><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-outline btn-sm">Let's Connect</a>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main>
+        
+        <!-- Hero / Home Section -->
+        <section id="home" class="section hero-section">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <div class="status-badge">
+                        <span class="pulse-dot"></span> III B.Tech IT Student
+                    </div>
+                    <p class="hero-desc">
+                        Hello! I am <strong>G.Sai Sreedhar</strong> — a passionate Information Technology undergraduate focused on web development, algorithmic problem solving, and building practical systems like virtual recruitment portals and food control management solutions.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> View Projects</a>
+                        <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-paper-plane"></i> Contact Me</a>
+                    </div>
+                </div>
+
+                <div class="hero-media">
+                    <div class="avatar-card">
+                        <div class="avatar-border">
+                            <img src="./assets/avatar.png" alt="G.Sai Sreedhar Profile Photo" class="avatar-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge">Get To Know Me</span>
+                    <h2 class="section-title">About <span class="accent-text">Me</span></h2>
+                    <div class="title-line"></div>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card card">
+                        <div class="card-icon"><i class="fa-solid fa-user-gear"></i></div>
+                        <h3>Passionate IT Student</h3>
+                        <p>
+                            I am currently pursuing my 3rd year B.Tech in Information Technology. I have a keen interest in modern frontend interface design, client-side validation logic, and full-stack software development.
+                        </p>
+                    </div>
+
+                    <div class="about-card card">
+                        <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h3>Problem Solving & Innovation</h3>
+                        <p>
+                            I enjoy tackling real-world challenges through technology. From building automated food inventory control systems to streamlining campus recruitment with virtual placement portals, I focus on clean code and user usability.
+                        </p>
+                    </div>
+
+                    <div class="about-card card">
+                        <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <h3>Career Goals</h3>
+                        <p>
+                            Aiming to leverage my technical expertise in web frameworks, database systems, and software engineering to contribute to impactful software development projects and collaborative tech teams.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills-section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge">My Abilities</span>
+                    <h2 class="section-title">Technical & Soft <span class="accent-text">Skills</span></h2>
+                    <div class="title-line"></div>
+                </div>
+
+                <div class="skills-wrapper">
+                    <!-- Technical Skills -->
+                    <div class="card skill-block">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-code"></i> Technical Skills</h3>
+                        <div class="skill-items">
+                            
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">Programming & Python</span>
+                                    <span class="skill-percentage">88%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="88%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">HTML5 & CSS3 Layouts</span>
+                                    <span class="skill-percentage">92%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="92%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">JavaScript & DOM Validation</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="85%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">Databases & SQL</span>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="80%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="card skill-block">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-comments"></i> Soft Skills</h3>
+                        <div class="skill-items">
+                            
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">Analytical Problem Solving</span>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="90%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">Communication & Pitching</span>
+                                    <span class="skill-percentage">92%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="92%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">Team Collaboration</span>
+                                    <span class="skill-percentage">88%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="88%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-meta">
+                                    <span class="skill-name">Project Management</span>
+                                    <span class="skill-percentage">84%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar" data-width="84%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section education-section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge">Academic Journey</span>
+                    <h2 class="section-title">Education <span class="accent-text">Background</span></h2>
+                    <div class="title-line"></div>
+                </div>
+
+                <div class="education-grid">
+                    <div class="card edu-card">
+                        <div class="edu-header">
+                            <div>
+                                <h3 class="edu-title">B.Tech in Information Technology</h3>
+                                <p class="edu-institution"><i class="fa-solid fa-building-columns"></i> 3rd Year Undergraduate</p>
+                            </div>
+                            <span class="edu-date">2023 – Present</span>
+                        </div>
+                        <p class="edu-details">
+                            Pursuing core tracks in Web Architecture, Software Engineering Principles, Relational Databases, Computer Networks, and Data Structures.
+                        </p>
+                    </div>
+
+                    <div class="card edu-card">
+                        <div class="edu-header">
+                            <div>
+                                <h3 class="edu-title">Higher Secondary Education</h3>
+                                <p class="edu-institution"><i class="fa-solid fa-school"></i> MPC Stream (Mathematics & Science)</p>
+                            </div>
+                            <span class="edu-date">2021 – 2023</span>
+                        </div>
+                        <p class="edu-details">
+                            Completed pre-university education with strong foundation in Mathematics, Physics, Chemistry, and introductory Computer Science.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge">Featured Software</span>
+                    <h2 class="section-title">My <span class="accent-text">Projects</span></h2>
+                    <div class="title-line"></div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1: Virtual Placement Portal -->
+                    <article class="card project-card">
+                        <div class="project-card-header">
+                            <span class="project-category">Web Application</span>
+                            <h3 class="project-name">Virtual Placement Portal</h3>
+                        </div>
+                        <p class="project-body">
+                            A comprehensive web application designed to streamline campus recruitment drives, student resume submissions, company hiring workflows, and real-time interview scheduling.
+                        </p>
+                        <div class="project-tags">
+                            <span>HTML/CSS</span>
+                            <span>JavaScript</span>
+                            <span>Database</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com" target="_blank" class="btn btn-primary btn-sm"><i class="fa-brands fa-github"></i> Repository</a>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Food Control System -->
+                    <article class="card project-card">
+                        <div class="project-card-header">
+                            <span class="project-category">Management System</span>
+                            <h3 class="project-name">Food Control & Quality Management</h3>
+                        </div>
+                        <p class="project-body">
+                            An automated web monitoring platform for tracking food inventory parameters, managing quality inspection logs, reducing wastage, and optimizing distribution logistics.
+                        </p>
+                        <div class="project-tags">
+                            <span>HTML5</span>
+                            <span>CSS Grid</span>
+                            <span>Validation</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com" target="_blank" class="btn btn-primary btn-sm"><i class="fa-brands fa-github"></i> Repository</a>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Automated Student & Resource Portal -->
+                    <article class="card project-card">
+                        <div class="project-card-header">
+                            <span class="project-category">Academic Portal</span>
+                            <h3 class="project-name">Automated Student & Resource Portal</h3>
+                        </div>
+                        <p class="project-body">
+                            A responsive student management web portal for digital resource distribution, academic record tracking, and automated campus notifications.
+                        </p>
+                        <div class="project-tags">
+                            <span>Vanilla JS</span>
+                            <span>Flexbox</span>
+                            <span>Responsive</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com" target="_blank" class="btn btn-primary btn-sm"><i class="fa-brands fa-github"></i> Repository</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge">Get In Touch</span>
+                    <h2 class="section-title">Contact <span class="accent-text">Me</span></h2>
+                    <p class="section-subtitle">Have a question or want to work together? Send a message below.</p>
+                    <div class="title-line"></div>
+                </div>
+
+                <div class="contact-layout">
+                    <!-- Contact Info Card -->
+                    <div class="card contact-info-card">
+                        <h3>Contact Information</h3>
+                        <p class="contact-text">
+                            Feel free to connect with me for project collaborations, software inquiries, or opportunities.
+                        </p>
+
+                        <div class="info-list">
+                            <div class="info-row">
+                                <div class="info-icon-box"><i class="fa-solid fa-user"></i></div>
+                                <div>
+                                    <span class="info-title">Name</span>
+                                    <span class="info-val">G.Sai Sreedhar</span>
+                                </div>
+                            </div>
+
+                            <div class="info-row">
+                                <div class="info-icon-box"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <span class="info-title">Email</span>
+                                    <a href="mailto:gudlasaisreedhar.24.it@anits.edu.in" class="info-val">gudlasaisreedhar.24.it@anits.edu.in</a>
+                                </div>
+                            </div>
+
+                            <div class="info-row">
+                                <div class="info-icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <span class="info-title">Department</span>
+                                    <span class="info-val">Information Technology (III Year)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://github.com" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="mailto:gudlasaisreedhar.24.it@anits.edu.in" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form Card -->
+                    <div class="card contact-form-card">
+                        <form id="contactForm" class="contact-form" novalidate>
+                            
+                            <!-- Name Field -->
+                            <div class="form-group" id="group-name">
+                                <label for="name" class="form-label">Full Name <span class="req">*</span></label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="e.g. G.Sai Sreedhar">
+                                <span class="error-msg" id="nameError" role="alert"></span>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="form-group" id="group-email">
+                                <label for="email" class="form-label">Email Address <span class="req">*</span></label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="e.g. gudlasaisreedhar.24.it@anits.edu.in">
+                                <span class="error-msg" id="emailError" role="alert"></span>
+                            </div>
+
+                            <!-- Subject Field -->
+                            <div class="form-group" id="group-subject">
+                                <label for="subject" class="form-label">Subject <span class="req">*</span></label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="e.g. Project Collaboration">
+                                <div class="hint-row">
+                                    <span class="error-msg" id="subjectError" role="alert"></span>
+                                    <span class="hint-text">Min 5 chars</span>
+                                </div>
+                            </div>
+
+                            <!-- Message Field -->
+                            <div class="form-group" id="group-message">
+                                <label for="message" class="form-label">Message <span class="req">*</span></label>
+                                <textarea id="message" name="message" rows="5" class="form-control" placeholder="Write your message here... (minimum 20 characters)"></textarea>
+                                <div class="hint-row">
+                                    <span class="error-msg" id="messageError" role="alert"></span>
+                                    <span class="counter-text" id="messageCounter">0 / 20 chars</span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+       
+        <div class="footer-bottom">
+            <div class="container">
+                <p> 2026 G.Sai Sreedhar. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal Alert -->
+    <div class="modal-backdrop" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content card">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+            <div class="modal-icon-wrap">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 id="modalTitle" class="modal-title">Message Sent Successfully!</h3>
+            <p class="modal-text">
+                Thank you for reaching out, <span id="senderName" class="highlight-name">Friend</span>! Your message has been validated and sent successfully.
+            </p>
+            <button class="btn btn-primary" id="modalOkBtn">Got it, Thanks!</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
