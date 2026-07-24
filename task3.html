@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Registration Form with real-time validation and clean simple user interface.">
+  <title>Student Registration Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       Simple & Clean Design System - Student Registration Form
+       ========================================================================== */
+
+    :root {
+      /* Color Palette - Simple, Clean & High Contrast */
+      --bg-color: #f8fafc;            /* Soft neutral grey */
+      --card-bg: #ffffff;             /* Crisp white card */
+      --text-main: #0f172a;           /* Dark slate text */
+      --text-muted: #64748b;          /* Muted text */
+      --border-color: #cbd5e1;        /* Clean light border */
+      --border-focus: #4f46e5;        /* Crisp Indigo focus */
+      
+      --primary-color: #4f46e5;       /* Indigo main button */
+      --primary-hover: #4338ca;       /* Darker indigo on hover */
+      --secondary-bg: #f1f5f9;        /* Light secondary button bg */
+      --secondary-hover: #e2e8f0;     /* Secondary button hover */
+      
+      --error-color: #dc2626;         /* Clear red error */
+      --error-bg: #fef2f2;            /* Light red tint for input */
+      --error-border: #fca5a5;        /* Red input border */
+      
+      --success-color: #16a34a;       /* Fresh green success */
+      --success-bg: #f0fdf4;          /* Light green tint */
+      --success-border: #86efac;      /* Green input border */
+
+      /* Typography & Layout */
+      --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --transition: all 0.2s ease-in-out;
+    }
+
+    /* Reset & Global Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    /* Header */
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header-icon {
+      width: 56px;
+      height: 56px;
+      background-color: #e0e7ff;
+      color: var(--primary-color);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .form-header h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Form Card */
+    .form-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 2.25rem;
+    }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    /* Form Group */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.375rem;
+    }
+
+    .required {
+      color: var(--error-color);
+    }
+
+    /* Input Wrapper & Controls */
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper input[type="text"],
+    .input-wrapper input[type="email"],
+    .input-wrapper input[type="tel"],
+    .input-wrapper input[type="password"],
+    .input-wrapper input[type="date"],
+    .input-wrapper select {
+      width: 100%;
+      height: 44px;
+      padding: 0.625rem 0.875rem 0.625rem 2.5rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text-main);
+      background-color: #ffffff;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .input-wrapper input[uppercase] {
+      text-transform: uppercase;
+    }
+
+    .input-wrapper select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .field-icon {
+      position: absolute;
+      left: 0.75rem;
+      color: var(--text-muted);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .select-arrow {
+      left: auto;
+      right: 0.75rem;
+    }
+
+    /* Input Focus State */
+    .input-wrapper input:focus,
+    .input-wrapper select:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .input-wrapper input:focus + .field-icon,
+    .input-wrapper select:focus ~ .field-icon {
+      color: var(--primary-color);
+    }
+
+    /* Password Toggle Button */
+    .toggle-password {
+      position: absolute;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .toggle-password:hover {
+      color: var(--text-main);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Password Strength Indicator */
+    .strength-bar-container {
+      height: 4px;
+      width: 100%;
+      background-color: #e2e8f0;
+      border-radius: 2px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .strength-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .strength-bar.weak {
+      width: 33%;
+      background-color: var(--error-color);
+    }
+
+    .strength-bar.medium {
+      width: 66%;
+      background-color: #eab308;
+    }
+
+    .strength-bar.strong {
+      width: 100%;
+      background-color: var(--success-color);
+    }
+
+    /* Radio Group (Gender) */
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .radio-card {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      background-color: #ffffff;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .radio-card input[type="radio"] {
+      display: none;
+    }
+
+    .radio-custom {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .radio-card input[type="radio"]:checked + .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .radio-card input[type="radio"]:checked + .radio-custom::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 6px;
+      height: 6px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .radio-card:has(input[type="radio"]:checked) {
+      border-color: var(--primary-color);
+      background-color: #f5f3ff;
+      color: var(--primary-color);
+    }
+
+    /* Validation State Styles */
+    .form-group.has-error input,
+    .form-group.has-error select {
+      border-color: var(--error-border);
+      background-color: var(--error-bg);
+    }
+
+    .form-group.has-error .field-icon {
+      color: var(--error-color);
+    }
+
+    .error-message {
+      font-size: 0.8rem;
+      color: var(--error-color);
+      margin-top: 0.375rem;
+      display: none;
+      font-weight: 500;
+    }
+
+    .form-group.has-error .error-message {
+      display: block;
+    }
+
+    .form-group.has-success input,
+    .form-group.has-success select {
+      border-color: var(--success-border);
+      background-color: var(--success-bg);
+    }
+
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      height: 46px;
+      padding: 0 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--secondary-hover);
+    }
+
+    .width-full {
+      width: 100%;
+    }
+
+    /* Modal Overlay & Card */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 1000;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .modal-card {
+      background-color: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 480px;
+      padding: 2rem;
+      text-align: center;
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .modal-icon.success {
+      background-color: #dcfce7;
+      color: var(--success-color);
+    }
+
+    .modal-card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .summary-card {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+    }
+
+    .summary-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .summary-value {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      .form-card {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+
+      .radio-group {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-actions {
+        flex-direction: column-reverse;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="form-header">
+      <div class="header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+      </div>
+      <h1>Student Registration</h1>
+      <p>Please fill out the form below to register for the academic session.</p>
+    </header>
+
+    <main class="form-card">
+      <form id="registrationForm" novalidate>
+        
+        <div class="form-grid">
+          <!-- Full Name -->
+          <div class="form-group" id="group-fullName">
+            <label for="fullName">Full Name <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Alex Morgan" autocomplete="name">
+              <span class="field-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+            </div>
+            <div class="error-message" id="err-fullName">Full name is required.</div>
+          </div>
+
+          <!-- Roll Number -->
+          <div class="form-group" id="group-rollNumber">
+            <label for="rollNumber">Roll Number <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g. 21CS045" uppercase>
+              <span class="field-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h6"/></svg>
+              </span>
+            </div>
+            <div class="error-message" id="err-rollNumber">Roll number must contain only letters and numbers.</div>
+          </div>
+
+          <!-- Email ID -->
+          <div class="form-group" id="group-email">
+            <label for="email">Email ID <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="email" id="email" name="email" placeholder="e.g. alex.morgan@student.edu">
+              <span class="field-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
+            </div>
+            <div class="error-message" id="err-email">Please enter a valid email address.</div>
+          </div>
+
+          <!-- Mobile Number -->
+          <div class="form-group" id="group-mobile">
+            <label for="mobile">Mobile Number <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="tel" id="mobile" name="mobile" maxlength="10" placeholder="e.g. 9876543210">
+              <span class="field-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </span>
+            </div>
+            <div class="error-message" id="err-mobile">Mobile number must contain exactly 10 digits.</div>
+          </div>
+
+          <!-- Date of Birth -->
+          <div class="form-group" id="group-dob">
+            <label for="dob">Date of Birth <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="date" id="dob" name="dob">
+              <span class="field-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </span>
+            </div>
+            <div class="error-message" id="err-dob">Date of birth is required.</div>
+          </div>
+
+          <!-- Department -->
+          <div class="form-group" id="group-department">
+            <label for="department">Department <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <select id="department" name="department">
+                <option value="">-- Select Department --</option>
+                <option value="Computer Science">Computer Science & Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Communication">Electronics & Communication</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Data Science">Data Science & AI</option>
+              </select>
+              <span class="field-icon select-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </div>
+            <div class="error-message" id="err-department">Please select your department.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group" id="group-password">
+            <label for="password">Password <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="password" id="password" name="password" placeholder="At least 8 characters">
+              <button type="button" class="toggle-password" data-target="password" aria-label="Toggle password visibility">
+                <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+            <div class="strength-bar-container">
+              <div class="strength-bar" id="strengthBar"></div>
+            </div>
+            <div class="error-message" id="err-password">Password must be at least 8 characters long.</div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group" id="group-confirmPassword">
+            <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password">
+              <button type="button" class="toggle-password" data-target="confirmPassword" aria-label="Toggle confirm password visibility">
+                <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+            <div class="error-message" id="err-confirmPassword">Password and Confirm Password must match.</div>
+          </div>
+
+          <!-- Gender -->
+          <div class="form-group full-width" id="group-gender">
+            <label>Gender <span class="required">*</span></label>
+            <div class="radio-group">
+              <label class="radio-card">
+                <input type="radio" name="gender" value="Male">
+                <span class="radio-custom"></span>
+                <span class="radio-label">Male</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="gender" value="Female">
+                <span class="radio-custom"></span>
+                <span class="radio-label">Female</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="gender" value="Other">
+                <span class="radio-custom"></span>
+                <span class="radio-label">Other</span>
+              </label>
+            </div>
+            <div class="error-message" id="err-gender">Please select your gender.</div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" id="demoFillBtn" class="btn btn-secondary">Fill Sample Data</button>
+          <button type="submit" id="submitBtn" class="btn btn-primary">
+            <span>Register Student</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+
+      </form>
+    </main>
+
+    <!-- Success Modal Overlay -->
+    <div class="modal-overlay hidden" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <div class="modal-icon success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 id="modalTitle">Registration Successful!</h2>
+        <p class="modal-subtitle">Student has been registered successfully with the following details:</p>
+
+        <div class="summary-card" id="summaryCard">
+          <!-- Filled dynamically by JS -->
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="closeModalBtn" class="btn btn-primary width-full">Register Another Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('registrationForm');
+      const demoFillBtn = document.getElementById('demoFillBtn');
+      const successModal = document.getElementById('successModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const summaryCard = document.getElementById('summaryCard');
+
+      // Input Fields
+      const fullNameInput = document.getElementById('fullName');
+      const rollNumberInput = document.getElementById('rollNumber');
+      const emailInput = document.getElementById('email');
+      const mobileInput = document.getElementById('mobile');
+      const dobInput = document.getElementById('dob');
+      const departmentSelect = document.getElementById('department');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirmPassword');
+      const genderInputs = document.querySelectorAll('input[name="gender"]');
+      const strengthBar = document.getElementById('strengthBar');
+
+      // Regex Patterns
+      const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const mobileRegex = /^[0-9]{10}$/;
+
+      /* -------------------------------------------------------------------------- */
+      /* Helper Functions for Form UI & Errors                                       */
+      /* -------------------------------------------------------------------------- */
+
+      function showError(groupId, errId, customMessage) {
+        const group = document.getElementById(groupId);
+        const errElem = document.getElementById(errId);
+
+        if (group) {
+          group.classList.add('has-error');
+          group.classList.remove('has-success');
+        }
+        if (errElem && customMessage) {
+          errElem.textContent = customMessage;
+        }
+      }
+
+      function clearError(groupId) {
+        const group = document.getElementById(groupId);
+        if (group) {
+          group.classList.remove('has-error');
+          group.classList.add('has-success');
+        }
+      }
+
+      function resetGroupState(groupId) {
+        const group = document.getElementById(groupId);
+        if (group) {
+          group.classList.remove('has-error', 'has-success');
+        }
+      }
+
+      /* -------------------------------------------------------------------------- */
+      /* Individual Field Validations                                              */
+      /* -------------------------------------------------------------------------- */
+
+      function validateFullName() {
+        const value = fullNameInput.value.trim();
+        if (!value) {
+          showError('group-fullName', 'err-fullName', 'Full Name should not be empty.');
+          return false;
+        }
+        clearError('group-fullName');
+        return true;
+      }
+
+      function validateRollNumber() {
+        const value = rollNumberInput.value.trim();
+        if (!value) {
+          showError('group-rollNumber', 'err-rollNumber', 'Roll Number should not be empty.');
+          return false;
+        }
+        if (!alphanumericRegex.test(value)) {
+          showError('group-rollNumber', 'err-rollNumber', 'Roll Number must contain only letters and numbers.');
+          return false;
+        }
+        clearError('group-rollNumber');
+        return true;
+      }
+
+      function validateEmail() {
+        const value = emailInput.value.trim();
+        if (!value) {
+          showError('group-email', 'err-email', 'Email ID should not be empty.');
+          return false;
+        }
+        if (!emailRegex.test(value)) {
+          showError('group-email', 'err-email', 'Email must be in a valid format (e.g. user@domain.com).');
+          return false;
+        }
+        clearError('group-email');
+        return true;
+      }
+
+      function validateMobile() {
+        const value = mobileInput.value.trim();
+        if (!value) {
+          showError('group-mobile', 'err-mobile', 'Mobile Number should not be empty.');
+          return false;
+        }
+        if (!mobileRegex.test(value)) {
+          showError('group-mobile', 'err-mobile', 'Mobile Number must contain exactly 10 digits.');
+          return false;
+        }
+        clearError('group-mobile');
+        return true;
+      }
+
+      function validateDOB() {
+        const value = dobInput.value;
+        if (!value) {
+          showError('group-dob', 'err-dob', 'Date of Birth should not be empty.');
+          return false;
+        }
+        clearError('group-dob');
+        return true;
+      }
+
+      function validateDepartment() {
+        const value = departmentSelect.value;
+        if (!value) {
+          showError('group-department', 'err-department', 'Department must be selected.');
+          return false;
+        }
+        clearError('group-department');
+        return true;
+      }
+
+      function validatePassword() {
+        const value = passwordInput.value;
+        if (!value) {
+          showError('group-password', 'err-password', 'Password should not be empty.');
+          updatePasswordStrength('');
+          return false;
+        }
+        if (value.length < 8) {
+          showError('group-password', 'err-password', 'Password must be at least 8 characters long.');
+          updatePasswordStrength(value);
+          return false;
+        }
+        clearError('group-password');
+        updatePasswordStrength(value);
+        return true;
+      }
+
+      function validateConfirmPassword() {
+        const confirmVal = confirmPasswordInput.value;
+        const passVal = passwordInput.value;
+
+        if (!confirmVal) {
+          showError('group-confirmPassword', 'err-confirmPassword', 'Please confirm your password.');
+          return false;
+        }
+        if (confirmVal !== passVal) {
+          showError('group-confirmPassword', 'err-confirmPassword', 'Password and Confirm Password must match.');
+          return false;
+        }
+        clearError('group-confirmPassword');
+        return true;
+      }
+
+      function validateGender() {
+        const selectedGender = Array.from(genderInputs).find(radio => radio.checked);
+        if (!selectedGender) {
+          showError('group-gender', 'err-gender', 'Gender must be selected.');
+          return false;
+        }
+        clearError('group-gender');
+        return true;
+      }
+
+      /* -------------------------------------------------------------------------- */
+      /* Password Strength Indicator Logic                                          */
+      /* -------------------------------------------------------------------------- */
+
+      function updatePasswordStrength(password) {
+        strengthBar.className = 'strength-bar';
+        if (!password) {
+          strengthBar.style.width = '0%';
+          return;
+        }
+
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        if (score <= 1) {
+          strengthBar.classList.add('weak');
+        } else if (score <= 3) {
+          strengthBar.classList.add('medium');
+        } else {
+          strengthBar.classList.add('strong');
+        }
+      }
+
+      /* -------------------------------------------------------------------------- */
+      /* Real-time Field Listeners                                                  */
+      /* -------------------------------------------------------------------------- */
+
+      fullNameInput.addEventListener('input', validateFullName);
+      fullNameInput.addEventListener('blur', validateFullName);
+
+      rollNumberInput.addEventListener('input', () => {
+        rollNumberInput.value = rollNumberInput.value.toUpperCase();
+        validateRollNumber();
+      });
+      rollNumberInput.addEventListener('blur', validateRollNumber);
+
+      emailInput.addEventListener('input', validateEmail);
+      emailInput.addEventListener('blur', validateEmail);
+
+      mobileInput.addEventListener('input', () => {
+        mobileInput.value = mobileInput.value.replace(/\D/g, '');
+        validateMobile();
+      });
+      mobileInput.addEventListener('blur', validateMobile);
+
+      dobInput.addEventListener('change', validateDOB);
+      dobInput.addEventListener('blur', validateDOB);
+
+      departmentSelect.addEventListener('change', validateDepartment);
+      departmentSelect.addEventListener('blur', validateDepartment);
+
+      passwordInput.addEventListener('input', () => {
+        validatePassword();
+        if (confirmPasswordInput.value) validateConfirmPassword();
+      });
+      passwordInput.addEventListener('blur', validatePassword);
+
+      confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+      confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+
+      genderInputs.forEach(radio => {
+        radio.addEventListener('change', validateGender);
+      });
+
+      /* -------------------------------------------------------------------------- */
+      /* Password Visibility Toggles                                                */
+      /* -------------------------------------------------------------------------- */
+
+      document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', () => {
+          const targetId = button.getAttribute('data-target');
+          const inputElem = document.getElementById(targetId);
+          const eyeOpen = button.querySelector('.eye-open');
+          const eyeClosed = button.querySelector('.eye-closed');
+
+          if (inputElem.type === 'password') {
+            inputElem.type = 'text';
+            eyeOpen.classList.add('hidden');
+            eyeClosed.classList.remove('hidden');
+          } else {
+            inputElem.type = 'password';
+            eyeOpen.classList.remove('hidden');
+            eyeClosed.classList.add('hidden');
+          }
+        });
+      });
+
+      /* -------------------------------------------------------------------------- */
+      /* Form Submission Handler                                                   */
+      /* -------------------------------------------------------------------------- */
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Trigger all validations
+        const isFullNameValid = validateFullName();
+        const isRollNumberValid = validateRollNumber();
+        const isEmailValid = validateEmail();
+        const isMobileValid = validateMobile();
+        const isDOBValid = validateDOB();
+        const isDeptValid = validateDepartment();
+        const isPasswordValid = validatePassword();
+        const isConfirmPasswordValid = validateConfirmPassword();
+        const isGenderValid = validateGender();
+
+        const isFormValid = isFullNameValid &&
+                            isRollNumberValid &&
+                            isEmailValid &&
+                            isMobileValid &&
+                            isDOBValid &&
+                            isDeptValid &&
+                            isPasswordValid &&
+                            isConfirmPasswordValid &&
+                            isGenderValid;
+
+        if (isFormValid) {
+          // Get Values for Summary Card
+          const selectedGender = Array.from(genderInputs).find(radio => radio.checked)?.value;
+          const formattedDOB = new Date(dobInput.value).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          summaryCard.innerHTML = `
+            <div class="summary-row">
+              <span class="summary-label">Full Name:</span>
+              <span class="summary-value">${escapeHTML(fullNameInput.value.trim())}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Roll Number:</span>
+              <span class="summary-value">${escapeHTML(rollNumberInput.value.trim())}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Email ID:</span>
+              <span class="summary-value">${escapeHTML(emailInput.value.trim())}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Mobile Number:</span>
+              <span class="summary-value">${escapeHTML(mobileInput.value.trim())}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Department:</span>
+              <span class="summary-value">${escapeHTML(departmentSelect.value)}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Gender:</span>
+              <span class="summary-value">${escapeHTML(selectedGender)}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Date of Birth:</span>
+              <span class="summary-value">${formattedDOB}</span>
+            </div>
+          `;
+
+          successModal.classList.remove('hidden');
+        } else {
+          // Focus on first invalid field
+          const firstErrorGroup = document.querySelector('.form-group.has-error');
+          if (firstErrorGroup) {
+            const inputToFocus = firstErrorGroup.querySelector('input, select');
+            if (inputToFocus) inputToFocus.focus();
+          }
+        }
+      });
+
+      /* -------------------------------------------------------------------------- */
+      /* Helper to Prevent XSS in summary output                                    */
+      /* -------------------------------------------------------------------------- */
+
+      function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+          tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+          }[tag] || tag)
+        );
+      }
+
+      /* -------------------------------------------------------------------------- */
+      /* Close Modal & Reset Form                                                   */
+      /* -------------------------------------------------------------------------- */
+
+      closeModalBtn.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+        form.reset();
+        
+        // Clear all validation states
+        [
+          'group-fullName', 'group-rollNumber', 'group-email', 'group-mobile',
+          'group-dob', 'group-department', 'group-password', 'group-confirmPassword', 'group-gender'
+        ].forEach(resetGroupState);
+
+        updatePasswordStrength('');
+      });
+
+      /* -------------------------------------------------------------------------- */
+      /* Demo Autofill Data Button                                                  */
+      /* -------------------------------------------------------------------------- */
+
+      demoFillBtn.addEventListener('click', () => {
+        fullNameInput.value = 'Alex Morgan';
+        rollNumberInput.value = '21CS045';
+        emailInput.value = 'alex.morgan@university.edu';
+        mobileInput.value = '9876543210';
+        dobInput.value = '2002-05-15';
+        departmentSelect.value = 'Computer Science';
+        passwordInput.value = 'SecurePass123!';
+        confirmPasswordInput.value = 'SecurePass123!';
+        
+        const maleRadio = document.querySelector('input[name="gender"][value="Male"]');
+        if (maleRadio) maleRadio.checked = true;
+
+        // Trigger validation styling
+        validateFullName();
+        validateRollNumber();
+        validateEmail();
+        validateMobile();
+        validateDOB();
+        validateDepartment();
+        validatePassword();
+        validateConfirmPassword();
+        validateGender();
+      });
+    });
+  </script>
+</body>
+</html>
